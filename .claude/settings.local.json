@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -n \"wa-float\\\\|^<script>$\\\\|pubModal.classList\" publicacoes.html)",
+      "Bash(curl -sL \"https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg\" -o /private/tmp/claude-501/-Users-mcorona-Downloads-Site-Matheus-Corona---Escrit-rio/73917518-a2c3-402d-937d-e47d473d0ad4/scratchpad/linkedin.svg)",
+      "Bash(python3 -c ' *)",
+      "Bash(python3)",
+      "Bash(git --version)",
+      "Bash(gh auth *)",
+      "mcp__mcp-registry__list_connectors",
+      "Bash(curl -s https://api.github.com/repos/cli/cli/releases/latest)",
+      "Bash(mkdir -p /Users/mcorona/.local/gh)",
+      "Bash(curl -sL -o gh.zip \"https://github.com/cli/cli/releases/download/v2.97.0/gh_2.97.0_macOS_arm64.zip\")",
+      "Bash(unzip -oq gh.zip -d gh_extracted)"
+    ]
+  }
+}
