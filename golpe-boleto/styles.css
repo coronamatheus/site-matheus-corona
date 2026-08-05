@@ -43,33 +43,37 @@ header.nav{position:relative;z-index:50;display:flex;align-items:center;padding:
 .hero-glow{position:absolute;top:-18%;right:-12%;width:60vw;height:60vw;border-radius:50%;
   background:radial-gradient(circle,rgba(198,166,100,.13),transparent 60%);pointer-events:none}
 .hero .wrap{position:relative;z-index:2}
-.hero-inner{max-width:760px}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;column-gap:32px;align-items:end}
+.hero-inner{max-width:640px;padding-bottom:6px}
 .hero .eyebrow{margin-bottom:20px}
 .hero h1{font-size:clamp(2.1rem,4.4vw,3.6rem);margin-bottom:20px}
 .hero h1 em{color:var(--gold-2);font-weight:500}
 .hero .lead{font-size:1.08rem;font-weight:300;max-width:600px;color:rgba(247,244,238,.78);margin-bottom:30px}
-.hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:34px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+
+/* FOTO — recorte sem fundo, dissolvendo no gradiente da seção */
+.hero-photo{position:relative;justify-self:center;align-self:end;width:100%;max-width:340px}
+.hero-photo img{width:100%;height:auto;display:block;filter:drop-shadow(0 30px 44px rgba(1,10,20,.45))}
+.hero-photo-tag{position:absolute;left:6%;bottom:7%;white-space:nowrap}
+.hero-photo-tag b{display:block;font-family:var(--serif);font-size:1.14rem;font-weight:500;color:var(--ivory);line-height:1.2}
+.hero-photo-tag span{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-2)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;padding:16px 32px;border-radius:var(--r-pill);font-weight:600;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;transition:transform .35s,box-shadow .35s,background .35s;white-space:nowrap;border:none;cursor:pointer}
 .btn svg{width:18px;height:18px;flex:none}
 .btn-gold{background:var(--gold);color:var(--navy);box-shadow:0 14px 34px -14px rgba(198,166,100,.7)}
 .btn-gold:hover{transform:translateY(-3px);background:var(--gold-2);box-shadow:0 20px 44px -16px rgba(198,166,100,.8)}
 .btn-ghost{color:rgba(247,244,238,.82);border:1px solid rgba(247,244,238,.28)}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-.hero-trust{display:flex;align-items:center;gap:14px;padding-top:26px;border-top:1px solid rgba(247,244,238,.14)}
-.hero-trust img{width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:top center;border:1px solid rgba(247,244,238,.3)}
-.hero-trust b{display:block;font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--ivory)}
-.hero-trust span{font-size:.76rem;color:rgba(247,244,238,.6)}
-
 .sec{padding:clamp(56px,8vw,92px) 0}
 .sec-head{max-width:660px;margin-bottom:44px}
 .sec-head h2{font-size:clamp(1.9rem,3.8vw,2.7rem);margin:18px 0 14px;color:var(--navy)}
 .sec-head p{color:var(--muted);max-width:60ch;font-size:1.02rem}
 
 /* ALERTA — bloco de reconhecimento do problema */
-.alert-strip{background:var(--alert-bg);border:1px solid var(--alert-line);border-radius:var(--r);padding:22px 26px;display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
-.alert-strip svg{width:22px;height:22px;flex:none;color:var(--alert);margin-top:2px}
-.alert-strip p{color:#5c2626;font-size:.96rem;line-height:1.6}
-.alert-strip strong{color:var(--alert)}
+.alert-strip{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--alert);border-radius:var(--r);padding:30px 32px;display:flex;gap:22px;align-items:center;box-shadow:var(--shadow-sm)}
+.alert-icon{flex:none;width:52px;height:52px;border-radius:50%;background:var(--alert-bg);display:flex;align-items:center;justify-content:center}
+.alert-icon svg{width:25px;height:25px;color:var(--alert)}
+.alert-copy .alert-lead{font-family:var(--serif);font-size:1.28rem;font-weight:500;color:var(--navy);line-height:1.35;margin-bottom:8px}
+.alert-copy p:not(.alert-lead){color:var(--muted);font-size:.94rem;line-height:1.65}
 
 /* COMO FUNCIONA */
 .sinais{background:var(--ivory-2)}
@@ -123,8 +127,9 @@ footer{background:var(--navy-2);color:rgba(247,244,238,.72);padding:56px 0 32px}
 .foot-inner a{font-size:.9rem;color:rgba(247,244,238,.75);transition:color .3s}
 .foot-inner a:hover{color:var(--gold)}
 .foot-links{display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
-.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;flex-wrap:wrap;gap:12px}
+.foot-bottom{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding-top:24px}
 .foot-bottom p{font-size:.76rem;color:rgba(247,244,238,.42)}
+.foot-bottom .foot-disclaimer{max-width:56ch;font-size:.72rem;line-height:1.6;color:rgba(247,244,238,.34);margin-top:4px;padding-top:14px;border-top:1px solid rgba(247,244,238,.08)}
 
 /* WhatsApp float */
 .wa-float{position:fixed;right:22px;bottom:22px;z-index:80;width:56px;height:56px;border-radius:50%;background:#25D366;border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -12px rgba(18,140,126,.65);transition:transform .35s,background .35s;color:#fff}
@@ -134,6 +139,11 @@ footer{background:var(--navy-2);color:rgba(247,244,238,.72);padding:56px 0 32px}
 @media(max-width:960px){
   .sinais-grid,.passos-grid{grid-template-columns:repeat(2,1fr)}
   .direitos-grid{grid-template-columns:1fr;gap:36px}
+  .hero-grid{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .hero-inner{max-width:640px}
+  .hero-actions{justify-content:center}
+  .hero-photo{margin-top:36px;max-width:280px}
+  .alert-strip{flex-direction:column;text-align:center}
 }
 @media(max-width:680px){
   .wrap{padding:0 22px}
@@ -141,7 +151,7 @@ footer{background:var(--navy-2);color:rgba(247,244,238,.72);padding:56px 0 32px}
   .nav-back{font-size:.7rem;padding:8px 14px}
   .sinais-grid,.passos-grid{grid-template-columns:1fr}
   .hero-actions{width:100%} .btn{width:100%}
+  .hero-photo{max-width:240px}
   .cta-card{padding:52px 22px}
-  .foot-bottom{flex-direction:column;text-align:center}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
