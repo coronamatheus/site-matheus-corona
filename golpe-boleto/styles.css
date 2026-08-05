@@ -78,7 +78,8 @@ header.nav{position:relative;z-index:50;padding:22px 20px 0;background:var(--nav
 .sec-head p{color:var(--muted);max-width:60ch;font-size:1.02rem}
 
 /* ALERTA — bloco de reconhecimento do problema */
-.alert-strip{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--alert);border-radius:var(--r);padding:30px 32px;display:flex;gap:22px;align-items:center;box-shadow:var(--shadow-sm)}
+.alert-strip{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:30px 32px 30px 36px;display:flex;gap:22px;align-items:center;box-shadow:var(--shadow-sm)}
+.alert-strip::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--alert)}
 .alert-icon{flex:none;width:52px;height:52px;border-radius:50%;background:var(--alert-bg);display:flex;align-items:center;justify-content:center}
 .alert-icon svg{width:25px;height:25px;color:var(--alert)}
 .alert-copy .alert-lead{font-family:var(--serif);font-size:1.28rem;font-weight:500;color:var(--navy);line-height:1.35;margin-bottom:8px}
