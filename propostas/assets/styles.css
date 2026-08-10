@@ -115,7 +115,7 @@ header.nav{position:relative;z-index:3;padding:22px 20px 26px}
 .invest-table td.item-valor{text-align:right}
 .invest-table td.item-valor .valor-num{color:var(--navy);font-family:var(--serif);font-size:1.18rem;font-weight:600}
 .invest-table td.item-valor .extenso{font-size:.68em;font-weight:400;color:var(--muted)}
-.invest-table td.item-valor .parcela-nota{display:inline-block;margin-top:8px;padding:4px 12px;border-radius:var(--r-pill);border:1px solid var(--line);background:var(--ivory-2);font-family:var(--sans);font-size:.7rem;font-weight:500;letter-spacing:.02em;color:var(--muted);white-space:normal;text-align:left}
+.invest-table td.item-valor .parcela-nota{display:inline-block;margin-top:8px;padding:4px 12px;border-radius:var(--r-pill);border:1px solid var(--line);background:var(--ivory-2);font-family:var(--sans);font-size:.7rem;font-weight:500;letter-spacing:.02em;color:var(--muted);white-space:normal;text-align:left;text-wrap:balance}
 .invest-foot{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center;padding:22px 26px;background:var(--navy);color:var(--ivory)}
 .invest-total span{display:block;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(247,244,238,.6);margin-bottom:4px}
 .invest-total b{font-family:var(--serif);font-size:1.7rem;color:var(--gold-2);font-weight:600}
