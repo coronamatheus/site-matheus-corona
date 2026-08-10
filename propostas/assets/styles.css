@@ -17,6 +17,11 @@
    consecutivos (a primeira leva o arredondamento pra cima). Em telas
    menores as classes n-3/4/5 colapsam para 2 colunas e depois 1 coluna
    automaticamente — não precisa tratar isso na hora de escrever o HTML.
+
+   Este arquivo também serve propostas/_modelo-pi/ (modelo-base para
+   Propriedade Intelectual / registro de marca). Os blocos PARECER,
+   PROCESSO e MARCAS abaixo são exclusivos desse modelo — nenhuma proposta
+   padrão usa essas classes, então editá-las não afeta as demais propostas.
    ========================================================================== */
 :root{
   --navy:#02223C; --navy-2:#03192B; --petrol:#065581;
@@ -88,6 +93,35 @@ header.nav{position:relative;z-index:3;padding:22px 20px 26px}
 .diag-card p{color:#3c4a55;font-size:1.02rem;margin-bottom:14px;max-width:74ch}
 .diag-card p:last-child{margin-bottom:0}
 
+/* PARECER — parecer técnico de busca prévia; exclusivo às propostas de
+   Propriedade Intelectual (propostas/_modelo-pi/). Reaproveita a base do
+   .diag-card, com um bloco de destaque para as classes recomendadas e um
+   selo de status do parecer. */
+.parecer-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:36px 38px;box-shadow:var(--shadow-sm)}
+.parecer-card p{color:#3c4a55;font-size:1.02rem;margin-bottom:14px;max-width:74ch}
+.parecer-card p:last-child{margin-bottom:0}
+.parecer-classes{list-style:none;margin:20px 0;padding:22px 24px;background:var(--ivory-2);border-radius:var(--r);border:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.parecer-classes li{font-size:.96rem;color:#3c4a55}
+.parecer-classes b{font-family:var(--serif);font-weight:600;color:var(--navy);font-size:1.02rem}
+.parecer-status{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:8px 18px;border-radius:var(--r-pill);background:rgba(198,166,100,.12);border:1px solid rgba(198,166,100,.35);color:var(--navy);font-size:.86rem;font-weight:500}
+.parecer-status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);flex:none}
+
+/* PROCESSO — linha do tempo do registro de marca; exclusiva às propostas
+   de Propriedade Intelectual. Em telas largas os passos ficam lado a lado
+   com uma linha conectando os selos numerados; abaixo de 960px vira uma
+   lista vertical (ver media queries no fim do arquivo). */
+.processo-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:22px}
+.processo-step{position:relative}
+.processo-step::before{content:"";position:absolute;top:22px;left:calc(-50% + 22px);width:calc(100% - 44px);height:1px;background:var(--line)}
+.processo-step:first-child::before{display:none}
+.processo-badge{position:relative;z-index:1;width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--gold-2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.1rem;font-weight:600;margin-bottom:18px;box-shadow:var(--shadow-sm)}
+.processo-step h3{font-size:1.08rem;color:var(--navy);margin-bottom:10px}
+.processo-tags{list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.processo-tags li{font-size:.84rem;color:var(--muted);padding-left:14px;position:relative}
+.processo-tags li::before{content:"—";position:absolute;left:0;color:var(--gold)}
+.processo-step p{font-size:.88rem;color:var(--muted);line-height:1.55}
+.processo-eta{display:inline-block;margin-top:10px;font-size:.72rem;letter-spacing:.04em;color:var(--gold);font-weight:500}
+
 /* ESCOPO — ver regra de divisão de linhas no comentário do topo do arquivo */
 .escopo-grid{display:grid;gap:20px}
 .escopo-grid + .escopo-grid{margin-top:20px}
@@ -103,6 +137,17 @@ header.nav{position:relative;z-index:3;padding:22px 20px 26px}
 .item-escopo .num{font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--gold);display:block;margin-bottom:16px}
 .item-escopo h3{font-size:1.2rem;color:var(--navy);margin-bottom:10px}
 .item-escopo p{font-size:.98rem;color:var(--muted);line-height:1.62}
+
+/* MARCAS — tabela de marcas/classes dentro do Escopo; exclusiva às
+   propostas de Propriedade Intelectual. Mesma linguagem visual da
+   .invest-table, com colunas próprias. */
+.marcas-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:32px}
+.marcas-table{width:100%;border-collapse:collapse}
+.marcas-table th{text-align:left;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:16px 22px;border-bottom:1px solid var(--line);background:var(--ivory-2)}
+.marcas-table td{padding:18px 22px;border-bottom:1px solid var(--line);font-size:.98rem;color:var(--ink);vertical-align:top}
+.marcas-table tr:last-child td{border-bottom:none}
+.marcas-table td.marca-nome{font-family:var(--serif);font-weight:600;color:var(--navy);font-size:1.05rem}
+.marcas-table td.marca-classe,.marcas-table td.marca-apresentacao{color:var(--muted)}
 
 /* INVESTIMENTO */
 .invest-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden}
@@ -155,6 +200,12 @@ footer{background:var(--navy-2);color:rgba(247,244,238,.72);padding:52px 0 32px}
   .invest-table th:nth-child(2),.invest-table td.item-desc{display:none}
   .invest-table th:nth-child(1),.invest-table td:nth-child(1){width:44%}
   .invest-table th:nth-child(3),.invest-table td:nth-child(3){width:56%}
+  .processo-grid{grid-template-columns:1fr;gap:0}
+  .processo-step{padding-left:34px;padding-bottom:28px;border-left:1px solid var(--line)}
+  .processo-step:last-child{padding-bottom:0;border-left-color:transparent}
+  .processo-step::before{display:none}
+  .processo-badge{position:absolute;left:-22px;top:0}
+  .marcas-table th:nth-child(3),.marcas-table td.marca-apresentacao{display:none}
 }
 @media(max-width:680px){
   .wrap{padding:0 22px}
@@ -174,6 +225,9 @@ footer{background:var(--navy-2);color:rgba(247,244,238,.72);padding:52px 0 32px}
   .invest-foot{flex-direction:column;align-items:flex-start}
   .cta-card{padding:48px 22px}
   .diag-card{padding:28px 24px}
+  .parecer-card{padding:28px 24px}
+  .marcas-table th,.marcas-table td{padding:14px 16px}
+  .marcas-table th:nth-child(2),.marcas-table td.marca-classe{display:none}
 }
 @media(max-width:420px){
   /* nomes longos (3+ palavras) não cabem inteiros numa linha em telas bem
