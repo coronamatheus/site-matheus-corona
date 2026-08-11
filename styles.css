@@ -23,7 +23,8 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spacin
 em{font-style:italic}
 
 /* NAV */
-header.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px 30px;transition:padding .5s}
+header.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px 30px;transition:padding .5s,background .6s ease}
+header.nav.scrolled{background:rgba(251,250,246,.64);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
 .nav-shell{position:relative;width:100%;max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;
   padding:12px 20px 12px 26px;border-radius:var(--r-pill);
   background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05));
@@ -150,7 +151,7 @@ footer{background:var(--navy-2);color:rgba(247,244,238,.72);padding:72px 0 38px}
 .foot-social a svg{width:17px;height:17px}
 .foot-social a:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
 .foot-col h4{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;font-weight:600}
-.foot-col h4:not(:first-child){margin-top:22px}
+.foot-col h4:not(:first-child){margin-top:36px}
 .foot-col a,.foot-col p{display:block;font-size:.92rem;color:rgba(247,244,238,.7);margin-bottom:12px;transition:color .3s}
 .foot-col a:hover{color:var(--gold)}
 .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;flex-wrap:wrap;gap:12px}
