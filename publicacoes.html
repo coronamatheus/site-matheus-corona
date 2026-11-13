@@ -65,6 +65,25 @@
 .pub-body{display:flex;flex-direction:column;justify-content:center;flex:1;padding:40px 44px}
 .pub-featured h3{font-size:clamp(1.5rem,2.4vw,1.9rem)}
 .pub-featured .pub-excerpt{flex:0 0 auto;max-width:52ch}
+.pub-featured.pub-reverse{flex-direction:row-reverse}
+
+/* Várias fotos passando sozinhas (carrossel) */
+.pub-slides img{opacity:0;transition:opacity .9s ease}
+.pub-slides img.is-active{opacity:1}
+.pub-slides-ui{position:absolute;inset:0;z-index:2;pointer-events:none}
+.pub-slides-ui button{pointer-events:auto;cursor:pointer}
+.pub-slides-ui .nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.35);background:rgba(2,34,60,.55);color:var(--ivory);font-size:1.5rem;line-height:1;
+  display:flex;align-items:center;justify-content:center;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  opacity:0;transition:opacity .3s,background .3s}
+.pub-slides-ui .nav:hover{background:rgba(2,34,60,.85)}
+.pub-slides-ui .prev{left:14px}
+.pub-slides-ui .next{right:14px}
+.pub-slides:hover .nav,.pub-slides:focus-within .nav{opacity:1}
+.pub-slides-ui .dots{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:8px}
+.pub-slides-ui .dots button{width:9px;height:9px;padding:0;border:0;border-radius:5px;background:rgba(247,244,238,.55);transition:background .3s,width .3s}
+.pub-slides-ui .dots button.on{width:26px;background:var(--gold)}
+@media(hover:none){.pub-slides-ui .nav{opacity:.9}}
 
 /* Modal */
 .pub-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
@@ -88,7 +107,7 @@
 .pub-excerpt a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
 .pub-excerpt a:hover{color:var(--gold)}
 .pub-modal-media{margin:-54px -48px 30px}
-.pub-modal-media img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center 40%}
+.pub-modal-media .pub-media{position:relative;flex:none;min-height:0;margin:0;aspect-ratio:16/10}
 body.modal-open{overflow:hidden}
 
 .nav-links a.active{color:var(--gold)!important}
@@ -106,7 +125,7 @@ header.nav.scrolled .nav-links a.active{color:var(--gold)!important}
   .pub-modal{padding:14px}
   .pub-modal-box{padding:40px 26px;max-height:88vh}
   .pub-modal-media{margin:-40px -26px 24px}
-  .pub-featured{flex-direction:column}
+  .pub-featured,.pub-featured.pub-reverse{flex-direction:column}
   .pub-media{flex:none;min-height:0;aspect-ratio:4/3}
   .pub-body{padding:28px 24px}
   .nav-links a.active{color:var(--gold)!important}
@@ -153,6 +172,9 @@ header.nav.scrolled .nav-links a.active{color:var(--gold)!important}
   PUBLICAÇÃO COM FOTO (evento, mídia): copie o bloco <article class="pub-card pub-featured reveal"> do topo
   da lista, troque a foto (salve o arquivo na pasta do site e ajuste o src e o alt), o título e os textos.
   Ela ocupa a linha inteira. A data é opcional: se não quiser mostrar, basta não incluir a linha <time>.
+  VÁRIAS FOTOS: use <figure class="pub-media pub-slides"> com mais de uma <img> dentro (a primeira com
+  class="is-active"). As fotos passam sozinhas e o leitor também pode navegar por setas e bolinhas.
+  Para o card ficar com a foto à direita, acrescente a classe pub-reverse ao <article>.
 -->
 <section class="sec">
   <div class="wrap">
@@ -224,6 +246,27 @@ header.nav.scrolled .nav-links a.active{color:var(--gold)!important}
         </div>
       </article>
 
+      <article class="pub-card pub-featured pub-reverse reveal">
+        <figure class="pub-media pub-slides">
+          <img class="is-active" src="treinamento-valor-private-1.jpg" width="1400" height="934" alt="Apresentação sobre holding, estruturas patrimoniais e IRPF no treinamento Valor Private para Bankers, diante de uma plateia de assessores">
+          <img src="treinamento-valor-private-2.jpg" width="1400" height="934" loading="lazy" alt="Apresentação durante o treinamento Valor Private para Bankers, com a plateia acompanhando o conteúdo">
+          <img src="treinamento-valor-private-3.jpg" width="1400" height="934" loading="lazy" alt="Plateia de assessores acompanhando o treinamento Valor Private para Bankers">
+        </figure>
+        <div class="pub-body">
+          <span class="pub-tag">Treinamento</span>
+          <time class="pub-date" datetime="2026-01-15">15 de janeiro de 2026</time>
+          <h3>Treinamento Valor Private para Bankers</h3>
+          <p class="pub-excerpt">Holding, estruturas patrimoniais e IRPF, com uma abordagem prática e conectada à realidade do investidor de alta renda, foram os temas do treinamento realizado na <a href="https://valorinvestimentos.com.br/" target="_blank" rel="noopener">Valor Investimentos</a>.</p>
+          <button type="button" class="pub-more">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <div class="pub-full" hidden>
+            <p>Conhecimento técnico é parte essencial de uma gestão patrimonial consistente.</p>
+            <p>No treinamento Valor Private para Bankers, aprofundamos temas estratégicos como holding, estruturas patrimoniais e IRPF, com uma abordagem prática e conectada à realidade do investidor de alta renda.</p>
+            <p>Sob a condução do advogado <a href="https://www.linkedin.com/in/matheuscorona/" target="_blank" rel="noopener">Matheus Corona</a> o encontro reforçou a importância de planejamento, clareza e leitura integrada na proteção, organização e continuidade do patrimônio ao longo do tempo.</p>
+            <p>Reforçamos nossa presença, o diálogo qualificado e a construção de valor em cada momento.</p>
+          </div>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -245,7 +288,7 @@ header.nav.scrolled .nav-links a.active{color:var(--gold)!important}
   <div class="pub-modal-backdrop" data-close></div>
   <div class="pub-modal-box" role="dialog" aria-modal="true" aria-labelledby="pubModalTitle">
     <button type="button" class="pub-modal-close" data-close aria-label="Fechar">&times;</button>
-    <figure class="pub-modal-media" id="pubModalMedia" style="display:none"><img id="pubModalImg" alt=""></figure>
+    <figure class="pub-modal-media" id="pubModalMedia" style="display:none"></figure>
     <span class="pub-tag" id="pubModalTag"></span>
     <time class="pub-date" id="pubModalDate"></time>
     <h2 id="pubModalTitle"></h2>
@@ -303,21 +346,55 @@ const pubModalDate=document.getElementById('pubModalDate');
 const pubModalTitle=document.getElementById('pubModalTitle');
 const pubModalBody=document.getElementById('pubModalBody');
 const pubModalMedia=document.getElementById('pubModalMedia');
-const pubModalImg=document.getElementById('pubModalImg');
+let stopModalSlides=null;
+
+/* Carrossel: as fotos passam sozinhas; setas, bolinhas e deslizar o dedo também funcionam */
+function initSlides(root){
+  const imgs=[...root.querySelectorAll('img')];
+  if(imgs.length<2)return()=>{};
+  let i=Math.max(0,imgs.findIndex(im=>im.classList.contains('is-active')));
+  const ui=document.createElement('div');ui.className='pub-slides-ui';
+  const mk=(cls,txt,label)=>{const b=document.createElement('button');b.type='button';b.className=cls;b.textContent=txt;b.setAttribute('aria-label',label);return b};
+  const prev=mk('nav prev','‹','Foto anterior'),next=mk('nav next','›','Próxima foto');
+  const dotsBox=document.createElement('div');dotsBox.className='dots';
+  const dots=imgs.map((_,k)=>{const d=mk('','',`Foto ${k+1} de ${imgs.length}`);d.addEventListener('click',e=>{e.stopPropagation();show(k);restart()});dotsBox.appendChild(d);return d});
+  ui.append(prev,next,dotsBox);root.appendChild(ui);
+  function show(n){i=(n+imgs.length)%imgs.length;imgs.forEach((im,k)=>im.classList.toggle('is-active',k===i));dots.forEach((d,k)=>d.classList.toggle('on',k===i))}
+  let timer=null;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const play=()=>{if(!reduce&&!timer)timer=setInterval(()=>show(i+1),4500)};
+  const pause=()=>{clearInterval(timer);timer=null};
+  const restart=()=>{pause();play()};
+  prev.addEventListener('click',e=>{e.stopPropagation();show(i-1);restart()});
+  next.addEventListener('click',e=>{e.stopPropagation();show(i+1);restart()});
+  root.addEventListener('mouseenter',pause);root.addEventListener('mouseleave',play);
+  root.addEventListener('focusin',pause);root.addEventListener('focusout',play);
+  let x0=null;
+  root.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+  root.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>40){show(i+(dx<0?1:-1));restart()}},{passive:true});
+  show(i);play();
+  return pause;
+}
+document.querySelectorAll('.pub-slides').forEach(initSlides);
 
 function openPub(card){
   const dateEl=card.querySelector('.pub-date');
-  const mediaImg=card.querySelector('.pub-media img');
+  const media=card.querySelector('.pub-media');
   pubModalTag.textContent=card.querySelector('.pub-tag').textContent;
   if(dateEl){
     pubModalDate.style.display='';
     pubModalDate.textContent=dateEl.textContent;
     pubModalDate.setAttribute('datetime',dateEl.getAttribute('datetime'));
   }else{pubModalDate.style.display='none'}
-  if(mediaImg){
-    pubModalImg.src=mediaImg.src;
-    pubModalImg.alt=mediaImg.alt;
+  if(stopModalSlides){stopModalSlides();stopModalSlides=null}
+  pubModalMedia.textContent='';
+  if(media){
+    const clone=media.cloneNode(true);
+    const oldUi=clone.querySelector('.pub-slides-ui');if(oldUi)oldUi.remove();
+    clone.querySelectorAll('img').forEach(im=>im.removeAttribute('loading'));
+    pubModalMedia.appendChild(clone);
     pubModalMedia.style.display='';
+    if(clone.classList.contains('pub-slides'))stopModalSlides=initSlides(clone);
   }else{pubModalMedia.style.display='none'}
   pubModalTitle.textContent=card.querySelector('h3').textContent;
   pubModalBody.innerHTML=card.querySelector('.pub-full').innerHTML;
@@ -326,6 +403,7 @@ function openPub(card){
   document.body.classList.add('modal-open');
 }
 function closePub(){
+  if(stopModalSlides){stopModalSlides();stopModalSlides=null}
   pubModal.classList.remove('open');
   pubModal.setAttribute('aria-hidden','true');
   document.body.classList.remove('modal-open');
