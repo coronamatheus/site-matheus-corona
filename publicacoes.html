@@ -86,9 +86,12 @@
 @media(hover:none){.pub-slides-ui .nav{opacity:.9}}
 
 /* Caso em destaque (só texto): faixa navy na largura inteira */
-.pub-case{grid-column:1/-1;overflow:hidden;padding:46px 52px;border-color:rgba(198,166,100,.28);
+.pub-case{grid-column:1/-1;overflow:hidden;border-color:rgba(198,166,100,.28);
   background:radial-gradient(120% 140% at 85% 0%,#08315a 0%,var(--navy) 55%,var(--navy-2) 100%)}
-.pub-case::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}
+.pub-case:not(.pub-featured){padding:46px 52px}
+.pub-case:not(.pub-featured)::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}
+@media(min-width:681px){.pub-case .pub-media{flex-basis:56%}}
+.pub-case .pub-body{padding:44px 44px}
 .pub-case .pub-tag{color:var(--gold-2)}
 .pub-case .pub-date{color:rgba(247,244,238,.62)}
 .pub-case h3{color:var(--ivory);font-size:clamp(1.6rem,2.7vw,2.15rem);max-width:30ch}
@@ -139,7 +142,8 @@ header.nav.scrolled .nav-links a.active{color:var(--gold)!important}
   .pub-modal-box{padding:40px 26px;max-height:88vh}
   .pub-modal-media{margin:-40px -26px 24px}
   .pub-featured,.pub-featured.pub-reverse{flex-direction:column}
-  .pub-case{padding:32px 26px}
+  .pub-case:not(.pub-featured){padding:32px 26px}
+  .pub-case .pub-body{padding:30px 26px}
   .pub-media{flex:none;min-height:0;aspect-ratio:4/3}
   .pub-body{padding:28px 24px}
   .nav-links a.active{color:var(--gold)!important}
@@ -189,7 +193,8 @@ header.nav.scrolled .nav-links a.active{color:var(--gold)!important}
   VÁRIAS FOTOS: use <figure class="pub-media pub-slides"> com mais de uma <img> dentro (a primeira com
   class="is-active"). As fotos passam sozinhas e o leitor também pode navegar por setas e bolinhas.
   Para o card ficar com a foto à direita, acrescente a classe pub-reverse ao <article>.
-  CASO EM DESTAQUE (só texto, sem foto): copie o bloco <article class="pub-card pub-case reveal"> do fim da lista.
+  CASO EM DESTAQUE (faixa navy): copie o bloco <article class="pub-card pub-featured pub-case reveal"> do fim da lista.
+  Sem foto, tire a classe pub-featured e apague o <figure> e o <div class="pub-body"> que envolve o texto.
 -->
 <section class="sec">
   <div class="wrap">
@@ -282,20 +287,23 @@ header.nav.scrolled .nav-links a.active{color:var(--gold)!important}
         </div>
       </article>
 
-      <article class="pub-card pub-case reveal">
-        <span class="pub-tag">Caso de repercussão</span>
-        <time class="pub-date" datetime="2025-09">Setembro de 2025</time>
-        <h3>O poder disciplinar das universidades e as garantias fundamentais dos estudantes</h3>
-        <p class="pub-excerpt">O caso de estudantes de Medicina da UFES submetidos a sanções disciplinares ganhou repercussão na imprensa capixaba e trouxe à discussão os limites do poder disciplinar das instituições de ensino superior e a observância do contraditório, da ampla defesa e do devido processo legal.</p>
-        <button type="button" class="pub-more">Ler artigo completo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-        <div class="pub-full" hidden>
-          <p>Em setembro de 2025, o caso envolvendo estudantes do curso de Medicina da Universidade Federal do Espírito Santo (UFES), submetidos a sanções disciplinares após investigação relacionada ao acesso indevido a uma avaliação acadêmica, ganhou repercussão na imprensa capixaba.</p>
-          <p>O episódio trouxe à discussão questões relevantes sobre os limites do poder disciplinar das instituições de ensino superior, a autonomia universitária e, sobretudo, a observância das garantias constitucionais do contraditório, da ampla defesa e do devido processo legal.</p>
-          <p>Na ocasião, participei da atuação jurídica relacionada ao caso, que envolveu a análise dos procedimentos administrativos disciplinares e das medidas jurídicas cabíveis diante das circunstâncias apresentadas.</p>
-          <p>A situação evidencia a importância de que processos disciplinares conduzidos por instituições de ensino observem rigorosamente os parâmetros legais e constitucionais, assegurando que a aplicação de sanções seja precedida de procedimentos legítimos, decisões devidamente fundamentadas e respeito aos direitos dos envolvidos.</p>
-          <p>O caso também reforça a relevância do controle de legalidade dos atos administrativos, especialmente quando suas consequências podem impactar diretamente a trajetória acadêmica e profissional dos estudantes.</p>
-          <p class="pub-ref first">Reportagem relacionada: <a href="https://www.agazeta.com.br/colunas/vilmara-fernandes/alunos-de-medicina-punidos-por-hackear-prova-voltaram-as-aulas-na-ufes-0925" target="_blank" rel="noopener">Alunos de Medicina punidos por hackear prova voltaram às aulas na UFES – A Gazeta</a></p>
-          <p class="pub-ref">Processo relacionado: nº 5019731-57.2025.4.02.5001</p>
+      <article class="pub-card pub-featured pub-case reveal">
+        <figure class="pub-media"><img src="caso-ufes-administracao-central.jpg" width="1400" height="788" style="object-position:75% 60%" alt="Prédio da Administração Central da Universidade Federal do Espírito Santo (UFES)"></figure>
+        <div class="pub-body">
+          <span class="pub-tag">Caso de repercussão</span>
+          <time class="pub-date" datetime="2025-09">Setembro de 2025</time>
+          <h3>O poder disciplinar das universidades e as garantias fundamentais dos estudantes</h3>
+          <p class="pub-excerpt">O caso de estudantes de Medicina da UFES submetidos a sanções disciplinares ganhou repercussão na imprensa capixaba e trouxe à discussão os limites do poder disciplinar das instituições de ensino superior e a observância do contraditório, da ampla defesa e do devido processo legal.</p>
+          <button type="button" class="pub-more">Ler artigo completo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <div class="pub-full" hidden>
+            <p>Em setembro de 2025, o caso envolvendo estudantes do curso de Medicina da Universidade Federal do Espírito Santo (UFES), submetidos a sanções disciplinares após investigação relacionada ao acesso indevido a uma avaliação acadêmica, ganhou repercussão na imprensa capixaba.</p>
+            <p>O episódio trouxe à discussão questões relevantes sobre os limites do poder disciplinar das instituições de ensino superior, a autonomia universitária e, sobretudo, a observância das garantias constitucionais do contraditório, da ampla defesa e do devido processo legal.</p>
+            <p>Na ocasião, participei da atuação jurídica relacionada ao caso, que envolveu a análise dos procedimentos administrativos disciplinares e das medidas jurídicas cabíveis diante das circunstâncias apresentadas.</p>
+            <p>A situação evidencia a importância de que processos disciplinares conduzidos por instituições de ensino observem rigorosamente os parâmetros legais e constitucionais, assegurando que a aplicação de sanções seja precedida de procedimentos legítimos, decisões devidamente fundamentadas e respeito aos direitos dos envolvidos.</p>
+            <p>O caso também reforça a relevância do controle de legalidade dos atos administrativos, especialmente quando suas consequências podem impactar diretamente a trajetória acadêmica e profissional dos estudantes.</p>
+            <p class="pub-ref first">Reportagem relacionada: <a href="https://www.agazeta.com.br/colunas/vilmara-fernandes/alunos-de-medicina-punidos-por-hackear-prova-voltaram-as-aulas-na-ufes-0925" target="_blank" rel="noopener">Alunos de Medicina punidos por hackear prova voltaram às aulas na UFES – A Gazeta</a></p>
+            <p class="pub-ref">Processo relacionado: nº 5019731-57.2025.4.02.5001</p>
+          </div>
         </div>
       </article>
 
