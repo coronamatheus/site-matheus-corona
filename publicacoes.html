@@ -58,6 +58,14 @@
 .pub-more:hover{color:var(--gold);gap:12px}
 .pub-more svg{width:14px;height:14px;flex:none}
 
+/* Publicação em destaque, com foto (ocupa a linha inteira; a data é opcional) */
+.pub-featured{grid-column:1/-1;flex-direction:row;padding:0;overflow:hidden}
+.pub-media{flex:0 0 46%;position:relative;min-height:320px;margin:0;background:var(--navy)}
+.pub-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.pub-body{display:flex;flex-direction:column;justify-content:center;flex:1;padding:40px 44px}
+.pub-featured h3{font-size:clamp(1.5rem,2.4vw,1.9rem)}
+.pub-featured .pub-excerpt{flex:0 0 auto;max-width:52ch}
+
 /* Modal */
 .pub-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
   padding:24px;opacity:0;pointer-events:none;transition:opacity .35s ease}
@@ -75,6 +83,8 @@
 .pub-modal-box h2{font-size:clamp(1.5rem,3vw,2.1rem);color:var(--navy);margin:0 0 22px;line-height:1.16}
 .pub-modal-body p{color:#3c4a55;font-size:1rem;margin-bottom:16px}
 .pub-modal-body p:last-child{margin-bottom:0}
+.pub-modal-media{margin:-54px -48px 30px}
+.pub-modal-media img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center 40%}
 body.modal-open{overflow:hidden}
 
 .nav-links a.active{color:var(--gold)!important}
@@ -83,12 +93,18 @@ header.nav.scrolled .nav-links a.active{color:var(--gold)!important}
 
 @media(max-width:960px){
   .pub-grid{grid-template-columns:repeat(2,1fr)}
+  .pub-media{flex-basis:42%}
+  .pub-body{padding:32px}
 }
 @media(max-width:680px){
   .pub-hero{padding:130px 0 54px}
   .pub-grid{grid-template-columns:1fr;margin-top:40px}
   .pub-modal{padding:14px}
   .pub-modal-box{padding:40px 26px;max-height:88vh}
+  .pub-modal-media{margin:-40px -26px 24px}
+  .pub-featured{flex-direction:column}
+  .pub-media{flex:none;min-height:0;aspect-ratio:4/3}
+  .pub-body{padding:28px 24px}
   .nav-links a.active{color:var(--gold)!important}
 }
 </style>
@@ -129,6 +145,10 @@ header.nav.scrolled .nav-links a.active{color:var(--gold)!important}
      o título (h3), o resumo (.pub-excerpt) e o texto completo dentro de <div class="pub-full">
      (cada parágrafo em uma tag <p>...</p>).
   Não precisa mexer em nenhuma outra parte da página — o card e o modal são preenchidos automaticamente.
+
+  PUBLICAÇÃO COM FOTO (evento, mídia): copie o bloco <article class="pub-card pub-featured reveal"> do topo
+  da lista, troque a foto (salve o arquivo na pasta do site e ajuste o src e o alt), o título e os textos.
+  Ela ocupa a linha inteira. A data é opcional: se não quiser mostrar, basta não incluir a linha <time>.
 -->
 <section class="sec">
   <div class="wrap">
@@ -139,6 +159,21 @@ header.nav.scrolled .nav-links a.active{color:var(--gold)!important}
     </div>
 
     <div class="pub-grid">
+
+      <article class="pub-card pub-featured reveal">
+        <figure class="pub-media"><img src="evento-reforma-tributaria-academias.jpg" width="1400" height="1050" alt="Participantes do encontro “Reforma Tributária e Gestão Financeira para Academias”, realizado com a ACAGES e a Valor Investimentos"></figure>
+        <div class="pub-body">
+          <span class="pub-tag">Evento</span>
+          <h3>Reforma Tributária e Gestão Financeira para Academias</h3>
+          <p class="pub-excerpt">Encontro realizado em parceria com a ACAGES e a Valor Investimentos reuniu mais de 20 empresários do setor de academias para discutir o tema.</p>
+          <button type="button" class="pub-more">Saiba mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <div class="pub-full" hidden>
+            <p>Participei do encontro “Reforma Tributária e Gestão Financeira para Academias”, realizado em parceria com a ACAGES (Associação Empresarial das Academias do Espírito Santo) e a Valor Investimentos.</p>
+            <p>Com mais de 20 empresários do setor de academias presentes, pudemos discutir de forma bastante rica o conteúdo.</p>
+            <p>Agradeço à ACAGES, à Valor Investimentos e a todos os participantes pela parceria e pela troca.</p>
+          </div>
+        </div>
+      </article>
 
       <article class="pub-card reveal">
         <span class="pub-tag">Direito Societário</span>
@@ -203,6 +238,7 @@ header.nav.scrolled .nav-links a.active{color:var(--gold)!important}
   <div class="pub-modal-backdrop" data-close></div>
   <div class="pub-modal-box" role="dialog" aria-modal="true" aria-labelledby="pubModalTitle">
     <button type="button" class="pub-modal-close" data-close aria-label="Fechar">&times;</button>
+    <figure class="pub-modal-media" id="pubModalMedia" style="display:none"><img id="pubModalImg" alt=""></figure>
     <span class="pub-tag" id="pubModalTag"></span>
     <time class="pub-date" id="pubModalDate"></time>
     <h2 id="pubModalTitle"></h2>
@@ -259,12 +295,23 @@ const pubModalTag=document.getElementById('pubModalTag');
 const pubModalDate=document.getElementById('pubModalDate');
 const pubModalTitle=document.getElementById('pubModalTitle');
 const pubModalBody=document.getElementById('pubModalBody');
+const pubModalMedia=document.getElementById('pubModalMedia');
+const pubModalImg=document.getElementById('pubModalImg');
 
 function openPub(card){
   const dateEl=card.querySelector('.pub-date');
+  const mediaImg=card.querySelector('.pub-media img');
   pubModalTag.textContent=card.querySelector('.pub-tag').textContent;
-  pubModalDate.textContent=dateEl.textContent;
-  pubModalDate.setAttribute('datetime',dateEl.getAttribute('datetime'));
+  if(dateEl){
+    pubModalDate.style.display='';
+    pubModalDate.textContent=dateEl.textContent;
+    pubModalDate.setAttribute('datetime',dateEl.getAttribute('datetime'));
+  }else{pubModalDate.style.display='none'}
+  if(mediaImg){
+    pubModalImg.src=mediaImg.src;
+    pubModalImg.alt=mediaImg.alt;
+    pubModalMedia.style.display='';
+  }else{pubModalMedia.style.display='none'}
   pubModalTitle.textContent=card.querySelector('h3').textContent;
   pubModalBody.innerHTML=card.querySelector('.pub-full').innerHTML;
   pubModal.classList.add('open');
